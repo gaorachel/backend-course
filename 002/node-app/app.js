@@ -1,10 +1,76 @@
-const validator = require("validator");
+// const validator = require("validator");
 const chalk = require("chalk");
+const yargs = require("yargs");
 const getNotes = require("./notes");
 
-console.log(chalk.green("Success!"));
-console.log(chalk.bgGreen("Success!"));
-console.log(chalk.bgBlue("Success!"));
+// const command = process.argv[2];
+
+// customaise yargs version
+yargs.version("1.1.0");
+
+// create add command
+yargs.command({
+  command: "add",
+  describe: "add a new note",
+  builder: {
+    title: {
+      describe: "Note title",
+      //   demandOption: true, // default is false
+      //   type: "string",
+    },
+    body: {
+      describe: "Note body",
+      demandOption: true, // default is false
+      type: "string",
+    },
+  },
+  handler: (argv) => {
+    console.log("Title: " + argv.title);
+    console.log("Body: " + argv.body);
+  },
+});
+
+// create remove command
+
+yargs.command({
+  command: "remove",
+  describe: "remove a note",
+  handler: () => {
+    console.log("removing the note!");
+  },
+});
+
+yargs.command({
+  command: "list",
+  describe: "list a note",
+  handler: () => {
+    console.log("listing the note!");
+  },
+});
+
+yargs.command({
+  command: "read",
+  describe: "read a note",
+  handler: () => {
+    console.log("reading the note!");
+  },
+});
+
+yargs.parse();
+
+// console.log(yargs.argv);
+// console.log(process.argv);
+
+// if (command === "add") {
+//   console.log("Adding note!");
+// } else if (command === "remove") {
+//   console.log("Removing note!");
+// }
+// console.log(chalk.green("Success!"));
+// console.log(chalk.bgGreen("Success!"));
+// console.log(chalk.bgBlue("Success!"));
+
+// console.log(process.argv);
 
 // console.log(validator.isEmail("xxxx@gmail.com"));
 // console.log(validator.isEmail("xxxx@gmail"));
