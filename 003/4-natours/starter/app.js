@@ -34,7 +34,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
   const id = req.params.id * 1; // convert a string to a number
   const tour = tours.find((el) => el.id === id);
 
-  if (id > tours.length) || (!tour) {
+  if (!tour) {
     return res.status(404).json({
       status: 'fail',
       message: 'Invalid ID',
@@ -67,6 +67,35 @@ app.post('/api/v1/tours/', (req, res) => {
       });
     }
   );
+});
+
+app.patch('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { tour: 'This is a placeholder' },
+  });
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
+
+  res.status(204).json({
+    // 204 means no content - because after deleting, there is no data being sent back.
+    status: 'success',
+    data: null,
+  });
 });
 
 const port = 3000;
